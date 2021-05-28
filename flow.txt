@@ -1,0 +1,46 @@
+1 create auth controller 
+create auth service
+inside auth controller create routs as post api - /auth
+import auth in index.js
+console reqest.body inside auth controller
+import auth service in auth controller
+call auth method of auth service page in auth controller by passing postman payload req.body
+
+
+2 inside auth service
+impport userdao  in auth service
+goto user dao,create method name as isExist parameter as email,calls findOne with model by passing email as query
+console payload in side auth method in auth service 
+create let data=await with asyn userdao.isExist
+check if data is undefined then call reject with msg user is not registered
+if data is there print data
+check if pswrd coming from controller/payload is = password from data variable
+if pswrd match resolve msg as loggied in successfully
+if not match reject with invalid password
+
+bcrypt: 
+inside auth-service we need to write  jwt.sign
+bcrypt.hash inside userDAO,or user-service while create(/register) time and update 
+the hashed - password will update inside DB.
+
+const userDAO = {
+   
+    create: async(payload) => {
+
+    let password = await bcrypt.hash(payload.password, saltRounds);
+      payload.password=password; //here password updated with hash and also stored in DB asWell.
+
+jsonWebToken:
+inside middleware -> authentication -> we have to write the jwt.verify
+
+route.post(CONSTANT.ENDPOINT.LEAVE.LEAVE_APPLING,authentication, (req, res) => {
+
+authentication is middleware here.
+we have to write middleware in every route as i mentioned above..!
+
+
+const saltRounds=10; //salt value can be 8 or more than that,if it increases more than 10 
+// it take more time to exicute..default salt value is 10.10 rounds it do for encode 
+
+token i will get from /auth/login api.
+LEAVE_APPLING or for anything we have to use that token, inside headers in Authorization we have to pass this token
